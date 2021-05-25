@@ -1,0 +1,17 @@
+#nav-bar {
+    -fx-background-color: #81E979;
+}
+
+#main-page {
+    -fx-background-color: #F1DEDE;
+}
+
+.nav-button {
+    -fx-background-color: white;
+    -fx-background-radius: 0px;
+}
+
+/*.nav-button:armed, .nav-button:focused {*/
+/*    -fx-border-color: #29335C;*/
+/*    -fx-border-width: 0 0 0 3px;*/
+/*}*/

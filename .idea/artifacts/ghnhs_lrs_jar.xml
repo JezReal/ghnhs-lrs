@@ -1,0 +1,31 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ghnhs-lrs:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ghnhs_lrs_jar</output-path>
+    <root id="archive" name="ghnhs-lrs.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="ghnhs-lrs" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.23/mysql-connector-java-8.0.23.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/13/javafx-graphics-13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/13/javafx-base-13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/13/javafx-controls-13-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/13/javafx-controls-13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/13/javafx-fxml-13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/13/javafx-base-13-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/13/javafx-graphics-13-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/13/javafx-fxml-13-win.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.11.4" />
+      <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.23" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:13" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:13" />
+    </root>
+  </artifact>
+</component>

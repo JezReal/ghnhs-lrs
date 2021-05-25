@@ -1,0 +1,112 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.jezreal</groupId>
+    <artifactId>ghnhs-lrs</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>13</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.25</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>io.reactivex.rxjava2</groupId>-->
+        <!--            <artifactId>rxjava</artifactId>-->
+        <!--            <version>2.2.21</version>-->
+        <!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.reactivex.rxjava3</groupId>-->
+<!--            <artifactId>rxjava</artifactId>-->
+<!--            <version>3.0.13-RC4</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.itextpdf</groupId>-->
+<!--            <artifactId>itext7-core</artifactId>-->
+<!--            <version>7.1.15</version>-->
+<!--            <type>pom</type>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>net.sourceforge.dynamicreports</groupId>-->
+<!--            <artifactId>dynamicreports-core</artifactId>-->
+<!--            <version>6.12.1</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>net.sourceforge.dynamicreports</groupId>-->
+<!--            <artifactId>dynamicreports-adhoc</artifactId>-->
+<!--            <version>6.12.1</version>-->
+<!--        </dependency>-->
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.6</version>
+                <executions>
+                    <execution>
+                        <!-- Default configuration for running -->
+                        <!-- Usage: mvn clean javafx:run -->
+                        <id>default-cli</id>
+                        <configuration>
+                            <mainClass>io.github.jezreal.App</mainClass>
+                            <launcher>lrs-launcher</launcher>
+                            <compress>2</compress>
+                            <jlinkZipName>ghnhs-lrs</jlinkZipName>
+                            <jlinkImageName>ghnhs-lrs</jlinkImageName>
+                            <noManPages>true</noManPages>
+                            <noHeaderFiles>true</noHeaderFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.codehaus.mojo</groupId>-->
+<!--                <artifactId>truezip-maven-plugin</artifactId>-->
+<!--                <version>1.2</version>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>fix-batik-script</id>-->
+<!--                        <goals>-->
+<!--                            <goal>remove</goal>-->
+<!--                        </goals>-->
+<!--                        <phase>process-resources</phase>-->
+<!--                        <configuration>-->
+<!--                            <fileset>-->
+<!--                                <directory>${settings.localRepository}/org/apache/xmlgraphics/batik-script/1.13/batik-script-1.13.jar/META-INF/services</directory>-->
+<!--                                <includes>-->
+<!--                                    <include>org.apache.batik.script.InterpreterFactory</include>-->
+<!--                                </includes>-->
+<!--                            </fileset>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
+        </plugins>
+    </build>
+</project>
