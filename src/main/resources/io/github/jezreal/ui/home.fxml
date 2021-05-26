@@ -157,35 +157,35 @@
                         <Image url="@../icons/lrs-logo.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="addRecordPageButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="Add book">
+                  <Button fx:id="addRecordPageButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="Add book" textFill="#fffcfc">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/outline_add_black_48dp.png" />
+                              <Image url="@../icons/outline_add_white_24dp.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="borrowBooksButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="Borrow/Return">
+                  <Button fx:id="borrowBooksButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="Borrow/Return" textFill="#fffcfc">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/outline_library_books_black_24dp.png" />
+                              <Image url="@../icons/outline_library_books_white_24dp.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="viewRecordsPageButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="View records">
+                  <Button fx:id="viewRecordsPageButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="View records" textFill="#fffcfc">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/outline_list_black_24dp.png" />
+                              <Image url="@../icons/outline_list_white_24dp.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -197,11 +197,11 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" layoutX="-1.0" layoutY="408.0" prefHeight="128.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="450.0">
                <children>
-                  <Button fx:id="aboutPageButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="About">
+                  <Button fx:id="aboutPageButton" mnemonicParsing="false" prefWidth="150.0" styleClass="nav-button" text="About" textFill="#fffcfc">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../icons/outline_help_outline_black_24dp.png" />
+                              <Image url="@../icons/outline_help_outline_white_24dp.png" />
                            </image>
                         </ImageView>
                      </graphic>

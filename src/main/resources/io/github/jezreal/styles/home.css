@@ -1,5 +1,5 @@
 #nav-bar {
-    -fx-background-color: #81E979;
+   -fx-background-color:  #73E9F4;
 }
 
 #main-page {
@@ -7,11 +7,6 @@
 }
 
 .nav-button {
-    -fx-background-color: white;
+    -fx-background-color:  #484D69;
     -fx-background-radius: 0px;
 }
-
-/*.nav-button:armed, .nav-button:focused {*/
-/*    -fx-border-color: #29335C;*/
-/*    -fx-border-width: 0 0 0 3px;*/
-/*}*/
