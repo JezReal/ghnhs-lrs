@@ -107,25 +107,28 @@ public class Home {
     private ComboBox<String> namesCombobox;
 
     @FXML
-    private TableView<Transaction> borrowedBooksTable;
+    private TableView<Article> articlesTable;
 
     @FXML
-    private TableColumn<Transaction, String> firstNameColumn;
+    private TableColumn<Article, LocalDate> dateAcquiredColumn;
 
     @FXML
-    private TableColumn<Transaction, String> lastNameColumn;
+    private TableColumn<Article, String> articleNameColumn;
 
     @FXML
-    private TableColumn<Transaction, String> bookBorrowedColumn;
+    private TableColumn<Article, String> propertyNumberColumn;
 
     @FXML
-    private TableColumn<Transaction, LocalDate> dateBorrowedColumn;
+    private TableColumn<Article, Integer> articleQuantityColumn;
 
     @FXML
-    private TableColumn<Transaction, LocalDate> dateReturnedColumn;
+    private TableColumn<Article, Double> unitCostColumn;
 
     @FXML
-    private TableColumn<Transaction, Integer> quantityBorrowedColumn;
+    private TableColumn<Article, Double> totalCostColumn;
+
+    @FXML
+    private TableColumn<Article, String> remarksColumn;
 
     private ObservableList<Transaction> unreturnedTransactions;
     private ObservableList<String> unreturnedTransactionNames;
@@ -133,6 +136,8 @@ public class Home {
     private ObservableList<Transaction> transactions;
 
     private ObservableList<Book> books;
+
+    private ObservableList<Article> articles;
 
     public void initialize() {
 
@@ -167,6 +172,7 @@ public class Home {
             aboutPage.setVisible(false);
             loadBooksTableData();
             loadBorrowedBooksTableData();
+            loadArticlesData();
         });
 
         aboutPageButton.setOnAction(actionEvent -> {
@@ -178,6 +184,7 @@ public class Home {
 
         loadBooksTableData();
         loadBorrowedBooksTableData();
+        loadArticlesData();
         loadNamesComboBox();
         populateTable();
     }
@@ -191,28 +198,32 @@ public class Home {
                 new PropertyValueFactory<>("quantity")
         );
 
-        firstNameColumn.setCellValueFactory(
-                new PropertyValueFactory<>("firstName")
+        dateAcquiredColumn.setCellValueFactory(
+                new PropertyValueFactory<>("dateAcquired")
         );
 
-        lastNameColumn.setCellValueFactory(
-                new PropertyValueFactory<>("lastName")
+        articleNameColumn.setCellValueFactory(
+                new PropertyValueFactory<>("articleName")
         );
 
-        bookBorrowedColumn.setCellValueFactory(
-                new PropertyValueFactory<>("bookBorrowed")
+        propertyNumberColumn.setCellValueFactory(
+                new PropertyValueFactory<>("propertyNumber")
         );
 
-        dateBorrowedColumn.setCellValueFactory(
-                new PropertyValueFactory<>("dateBorrowed")
-        );
-
-        dateReturnedColumn.setCellValueFactory(
-                new PropertyValueFactory<>("dateReturned")
-        );
-
-        quantityBorrowedColumn.setCellValueFactory(
+        articleQuantityColumn.setCellValueFactory(
                 new PropertyValueFactory<>("quantity")
+        );
+
+        unitCostColumn.setCellValueFactory(
+                new PropertyValueFactory<>("unitCost")
+        );
+
+        totalCostColumn.setCellValueFactory(
+                new PropertyValueFactory<>("totalCost")
+        );
+
+        remarksColumn.setCellValueFactory(
+                new PropertyValueFactory<>("remarks")
         );
     }
 
@@ -222,8 +233,8 @@ public class Home {
     }
 
     public void loadBorrowedBooksTableData() {
-        transactions = Database.getAllTransactions();
-        borrowedBooksTable.setItems(transactions);
+//        transactions = Database.getAllTransactions();
+//        borrowedBooksTable.setItems(transactions);
     }
 
     public void loadNamesComboBox() {
@@ -427,5 +438,10 @@ public class Home {
         articleQuantityInput.clear();
         unitCostInput.clear();
         remarksInput.clear();
+    }
+
+    private void loadArticlesData() {
+        articles = Database.getAllArticles();
+        articlesTable.setItems(articles);
     }
 }

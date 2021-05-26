@@ -324,7 +324,33 @@ public class Database {
         } catch (SQLException e) {
             System.out.println("article query error");
         }
+    }
+
+    public static ObservableList<Article> getAllArticles() {
+        Connection connection = getConnection();
+        ObservableList<Article> articles = FXCollections.observableArrayList();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM articles_table");
+
+            while (resultSet.next()) {
+                int articleId = resultSet.getInt("article_id");
+                LocalDate dateAcquired = resultSet.getDate("date_acquired").toLocalDate();
+                String articleName = resultSet.getString("article_name");
+                String propertyNumber = resultSet.getString("property_number");
+                int quantity = resultSet.getInt("quantity");
+                double unitCost = resultSet.getDouble("unit_cost");
+                double totalCost = resultSet.getDouble("total_cost");
+                String remarks = resultSet.getString("remarks");
+
+                articles.add(new Article(articleId, dateAcquired, articleName, propertyNumber, quantity, unitCost, totalCost, remarks));
+            }
+        } catch (SQLException e) {
+            System.out.println("Something went wrong with the query");
+        }
 
 
+        return articles;
     }
 }
