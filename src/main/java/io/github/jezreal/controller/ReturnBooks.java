@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 
-public class ReturnBooksController {
+public class ReturnBooks {
 
     @FXML
     private AnchorPane returnBooks;

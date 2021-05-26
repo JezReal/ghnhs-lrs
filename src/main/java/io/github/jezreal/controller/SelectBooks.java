@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectBooksController {
+public class SelectBooks {
 
     @FXML
     private ComboBox<String> booksCombobox;

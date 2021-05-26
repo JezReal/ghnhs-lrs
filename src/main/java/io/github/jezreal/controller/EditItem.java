@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class EditItemController {
+public class EditItem {
 
     @FXML
     private TextField descriptionTextfield;
