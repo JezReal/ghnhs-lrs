@@ -2,11 +2,11 @@
    -fx-background-color:  #73E9F4;
 }
 
-#main-page {
-    -fx-background-color: #F1DEDE;
-}
-
 .nav-button {
     -fx-background-color:  #484D69;
     -fx-background-radius: 0px;
+}
+
+.pane {
+    -fx-background-color:  #52688F;
 }
