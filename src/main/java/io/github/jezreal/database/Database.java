@@ -4,6 +4,7 @@ import io.github.jezreal.model.Article;
 import io.github.jezreal.model.Book;
 import io.github.jezreal.model.BookToReturn;
 import io.github.jezreal.model.Transaction;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -130,7 +131,7 @@ public class Database {
         int existingQuantity = getBook(bookId).getQuantity();
         int newQuantity = existingQuantity + quantity;
 
-        formatter.format("UPDATE books_table SET quantity='%d' WHERE id='%d'", newQuantity , bookId);
+        formatter.format("UPDATE books_table SET quantity='%d' WHERE id='%d'", newQuantity, bookId);
 
         System.out.println("Update book: " + stringBuilder);
         try {
@@ -182,7 +183,7 @@ public class Database {
 
     public static void addBorrowedBook(String firstName, String lastName, LocalDate date, int id, int quantity, Book book) {
         Connection connection = getConnection();
-        String query = "INSERT INTO transaction_table (book_id, first_name, last_name, date_borrowed, quantity_borrowed) VALUES('" + id + "','" + firstName + "','" + lastName + "','" + date + "','" + quantity + "')";
+        String query = "INSERT INTO transactions_table (book_id, first_name, last_name, date_borrowed, quantity_borrowed) VALUES('" + id + "','" + firstName + "','" + lastName + "','" + date + "','" + quantity + "')";
 
 
         try {
@@ -205,7 +206,7 @@ public class Database {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT first_name, last_name from transaction_table WHERE date_returned IS NULL");
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT first_name, last_name from transactions_table WHERE date_returned IS NULL");
 
             while (resultSet.next()) {
                 String firstName = resultSet.getString("first_name");
@@ -225,7 +226,7 @@ public class Database {
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM transaction_table");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM transactions_table");
 
             while (resultSet.next()) {
                 int transactionId = resultSet.getInt("transaction_id");
@@ -259,7 +260,7 @@ public class Database {
     public static void updateTransaction(int transactionId) {
         Connection connection = getConnection();
 
-        String query = "UPDATE transaction_table SET date_returned='" + LocalDate.now() + "'" + "WHERE transaction_id='" + transactionId + "'";
+        String query = "UPDATE transactions_table SET date_returned='" + LocalDate.now() + "'" + "WHERE transaction_id='" + transactionId + "'";
 
         System.out.println("Update transaction: " + query);
         try {
@@ -278,13 +279,13 @@ public class Database {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("SELECT transaction_table.transaction_id, transaction_table.book_id, books_table.description, transaction_table.quantity_borrowed FROM books_table JOIN transaction_table ON transaction_table.book_id=books_table.id WHERE transaction_table.first_name='%s' AND transaction_table.last_name='%s' AND transaction_table.date_returned is NULL", firstName, lastName);
+        formatter.format("SELECT transactions_table.transaction_id, transactions_table.book_id, books_table.description, transactions_table.quantity_borrowed FROM books_table JOIN transactions_table ON transactions_table.book_id=books_table.id WHERE transactions_table.first_name='%s' AND transactions_table.last_name='%s' AND transactions_table.date_returned is NULL", firstName, lastName);
 
         try {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 int transactionId = resultSet.getInt("transaction_id");
                 int bookId = resultSet.getInt("book_id");
                 String description = resultSet.getString("description");
@@ -352,5 +353,80 @@ public class Database {
 
 
         return articles;
+    }
+
+    public static ObservableList<Transaction> getUniqueTransactions() {
+        ObservableList<Transaction> uniqueTransactions = FXCollections.observableArrayList();
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT DISTINCT first_name, last_name from transactions_table");
+
+            while (resultSet.next()) {
+                String firstName = resultSet.getString("first_name");
+                String lastName = resultSet.getString("last_name");
+
+                uniqueTransactions.add(new Transaction(firstName, lastName));
+            }
+        } catch (SQLException e) {
+            System.out.println("Something went wrong with the query");
+        }
+
+        return uniqueTransactions;
+    }
+
+    public static ObservableList<Transaction> getTransactionsByName(String firstName, String lastName) {
+        ObservableList<Transaction> transactions = FXCollections.observableArrayList();
+
+        Connection connection = getConnection();
+        StringBuilder stringBuilder = new StringBuilder();
+        Formatter formatter = new Formatter(stringBuilder);
+
+        formatter.format("SELECT * FROM transactions_table WHERE first_name='%s' AND last_name='%s'", firstName, lastName);
+
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
+
+           while(resultSet.next()) {
+                int transactionId = resultSet.getInt("transaction_id");
+                int bookId = resultSet.getInt("book_id");
+                LocalDate dateBorrowed = resultSet.getDate("date_borrowed").toLocalDate();
+                LocalDate dateReturned = null;
+
+                try {
+                    dateReturned = resultSet.getDate("date_returned").toLocalDate();
+                } catch (NullPointerException ignored) {
+                }
+
+                int quantityBorrowed = resultSet.getInt("quantity_borrowed");
+
+                Transaction transaction;
+
+                if (dateReturned == null) {
+                    transaction = new Transaction(
+                            transactionId,
+                            bookId,
+                            dateBorrowed,
+                            quantityBorrowed
+                    );
+                } else {
+                    transaction = new Transaction(
+                            transactionId,
+                            bookId,
+                            dateBorrowed,
+                            dateReturned,
+                            quantityBorrowed
+                    );
+                }
+
+                transactions.add(transaction);
+            }
+        } catch (SQLException e) {
+            System.out.println("Sql error");
+            e.printStackTrace();
+        }
+
+        return transactions;
     }
 }

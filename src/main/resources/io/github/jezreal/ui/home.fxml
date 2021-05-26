@@ -19,11 +19,11 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<BorderPane maxHeight="720.0" maxWidth="1280.0" minHeight="360.0" minWidth="640.0" prefHeight="650.0" prefWidth="950.0" styleClass="thisisaclass" stylesheets="@../styles/home.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.jezreal.controller.Home">
+<BorderPane maxHeight="720.0" maxWidth="1280.0" minHeight="360.0" minWidth="640.0" prefHeight="620.0" prefWidth="950.0" styleClass="thisisaclass" stylesheets="@../styles/home.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="io.github.jezreal.controller.Home">
    <center>
       <AnchorPane id="main-page" minHeight="360.0" minWidth="640.0" prefHeight="0.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="addRecordPage" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="addRecordPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="477.0" fitWidth="485.0" layoutX="103.0" layoutY="69.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
                      <image>
@@ -64,7 +64,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="borrowBooksPage" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="borrowBooksPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
                      <image>
@@ -138,11 +138,15 @@
                         <TableColumn fx:id="remarksColumn" prefWidth="108.66668701171875" text="Remarks" />
                     </columns>
                   </TableView>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                  <ComboBox prefWidth="150.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="View borrowed book/s by teacher" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="30.0">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font></Text>
+                  <ComboBox fx:id="teacherNamesCombobox" prefWidth="150.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="30.0" />
+                  <Button fx:id="selectTeacherNameButton" mnemonicParsing="false" text="Select" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="200.0" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="aboutPage" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="aboutPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
                      <image>

@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -102,7 +103,6 @@ public class Home {
     @FXML
     private Button addArticleButton;
 
-
     @FXML
     private ComboBox<String> namesCombobox;
 
@@ -130,6 +130,12 @@ public class Home {
     @FXML
     private TableColumn<Article, String> remarksColumn;
 
+    @FXML
+    private ComboBox<String> teacherNamesCombobox;
+
+    @FXML
+    private Button selectTeacherNameButton;
+
     private ObservableList<Transaction> unreturnedTransactions;
     private ObservableList<String> unreturnedTransactionNames;
 
@@ -138,6 +144,9 @@ public class Home {
     private ObservableList<Book> books;
 
     private ObservableList<Article> articles;
+
+    private ObservableList<Transaction> teacherNames;
+    private ObservableList<String> teacherNamesString;
 
     public void initialize() {
 
@@ -173,6 +182,7 @@ public class Home {
             loadBooksTableData();
             loadBorrowedBooksTableData();
             loadArticlesData();
+            loadTeacherNamesComboBox();
         });
 
         aboutPageButton.setOnAction(actionEvent -> {
@@ -186,10 +196,11 @@ public class Home {
         loadBorrowedBooksTableData();
         loadArticlesData();
         loadNamesComboBox();
-        populateTable();
+        loadTeacherNamesComboBox();
+        setupTables();
     }
 
-    private void populateTable() {
+    private void setupTables() {
         descriptionColumn.setCellValueFactory(
                 new PropertyValueFactory<>("description")
         );
@@ -326,6 +337,8 @@ public class Home {
 
         selectReturnButton.setOnAction(action -> loadReturnBooksDialog());
 
+        selectTeacherNameButton.setOnAction(action -> loadDataByTeacher());
+
     }
 
     private void loadSelectBooksDialog() {
@@ -333,7 +346,7 @@ public class Home {
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/select_books.fxml"));
             Parent root = fxmlLoader.load();
 
-            SelectBooksController selectBooksController = fxmlLoader.getController();
+            SelectBooks selectBooks = fxmlLoader.getController();
 
             ObservableList<Book> availableBooks = Database.getAvailableBooks();
 
@@ -348,8 +361,8 @@ public class Home {
                 alert.setContentText("Invalid input. Please check your input");
                 alert.showAndWait();
             } else {
-                selectBooksController.setData(availableBooks, firstNameInput.getText(), lastNameInput.getText(), datePickerInput.getValue());
-                selectBooksController.setHomeController(this);
+                selectBooks.setData(availableBooks, firstNameInput.getText(), lastNameInput.getText(), datePickerInput.getValue());
+                selectBooks.setHomeController(this);
 
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -395,13 +408,13 @@ public class Home {
                 alert.showAndWait();
             } else {
 
-                ReturnBooksController returnBooksController = fxmlLoader.getController();
+                ReturnBooks returnBooks = fxmlLoader.getController();
 
                 int index = namesCombobox.getSelectionModel().getSelectedIndex();
                 Transaction transaction = unreturnedTransactions.get(index);
 
-                returnBooksController.setData(transaction.getFirstName(), transaction.getLastName());
-                returnBooksController.setHomeController(this);
+                returnBooks.setData(transaction.getFirstName(), transaction.getLastName());
+                returnBooks.setHomeController(this);
 
                 Scene scene = new Scene(root);
                 Stage stage = new Stage();
@@ -443,5 +456,49 @@ public class Home {
     private void loadArticlesData() {
         articles = Database.getAllArticles();
         articlesTable.setItems(articles);
+    }
+
+    private void loadTeacherNamesComboBox() {
+        teacherNames = Database.getUniqueTransactions();
+        teacherNamesString = FXCollections.observableArrayList();
+
+        for (Transaction transaction : teacherNames) {
+            String name = transaction.getLastName() + ", " + transaction.getFirstName();
+            teacherNamesString.add(name);
+        }
+
+        teacherNamesCombobox.setItems(teacherNamesString);
+    }
+
+    private void loadDataByTeacher() {
+        if (teacherNamesCombobox.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("Invalid input");
+            alert.setContentText("Please select a name");
+            alert.showAndWait();
+        } else {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/books_data_by_person.fxml"));
+                Parent root = fxmlLoader.load();
+
+                BooksDataByPersonController controller = fxmlLoader.getController();
+
+                //get first name and last name by using the index
+                int index = teacherNamesCombobox.getSelectionModel().getSelectedIndex();
+                String firstName = teacherNames.get(index).getFirstName();
+                String lastName = teacherNames.get(index).getLastName();
+
+                controller.setData(firstName, lastName);
+
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.show();
+            } catch (IOException ignored) {
+
+            }
+        }
     }
 }

@@ -66,6 +66,25 @@ public class Transaction {
         this.lastName = lastName;
     }
 
+    public Transaction(int transactionId, int bookId, LocalDate dateBorrowed, LocalDate dateReturned, int quantity) {
+        this.transactionId = transactionId;
+        this.bookId = bookId;
+        this.dateBorrowed = dateBorrowed;
+        this.dateReturned = dateReturned;
+        this.quantity = quantity;
+
+        this.bookBorrowed = Database.getBook(bookId).getDescription();
+    }
+
+    public Transaction(int transactionId, int bookId, LocalDate dateBorrowed, int quantity) {
+        this.transactionId = transactionId;
+        this.bookId = bookId;
+        this.dateBorrowed = dateBorrowed;
+        this.quantity = quantity;
+
+        this.bookBorrowed = Database.getBook(bookId).getDescription();
+    }
+
     public int getTransactionId() {
         return transactionId;
     }
