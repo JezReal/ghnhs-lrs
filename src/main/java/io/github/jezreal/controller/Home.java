@@ -2,6 +2,7 @@ package io.github.jezreal.controller;
 
 import io.github.jezreal.App;
 import io.github.jezreal.database.Database;
+import io.github.jezreal.model.Article;
 import io.github.jezreal.model.Book;
 import io.github.jezreal.model.Transaction;
 import javafx.collections.FXCollections;
@@ -12,14 +13,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static javafx.scene.control.Alert.AlertType.*;
+import static javafx.scene.control.Alert.AlertType.ERROR;
+import static javafx.scene.control.Alert.AlertType.INFORMATION;
 
 public class Home {
 
@@ -79,6 +80,28 @@ public class Home {
 
     @FXML
     private Button selectReturnButton;
+
+    @FXML
+    private DatePicker articlesDatePickerInput;
+
+    @FXML
+    private TextField articleNameInput;
+
+    @FXML
+    private TextField propertyNumberInput;
+
+    @FXML
+    private TextField articleQuantityInput;
+
+    @FXML
+    private TextField unitCostInput;
+
+    @FXML
+    private TextArea remarksInput;
+
+    @FXML
+    private Button addArticleButton;
+
 
     @FXML
     private ComboBox<String> namesCombobox;
@@ -247,8 +270,39 @@ public class Home {
 
                 Alert alert = new Alert(INFORMATION);
                 alert.setHeaderText("Success!");
-                alert.setContentText("Record has been added successfully");
+                alert.setContentText("Book has been added successfully");
                 alert.showAndWait();
+            } else {
+                Alert alert = new Alert(ERROR);
+                alert.setHeaderText("Invalid input!");
+                alert.setContentText("There is an error in your input. Please try again");
+                alert.showAndWait();
+            }
+        });
+
+        addArticleButton.setOnAction(event -> {
+            if (validateAddArticleInput()) {
+                int quantity = Integer.parseInt(articleQuantityInput.getText());
+                double unitCost = Double.parseDouble(unitCostInput.getText());
+                double totalCost = quantity * unitCost;
+
+                Article article = new Article(
+                        articlesDatePickerInput.getValue(),
+                        articleNameInput.getText(),
+                        propertyNumberInput.getText(),
+                        quantity,
+                        unitCost,
+                        totalCost,
+                        remarksInput.getText()
+                );
+
+                Database.addArticle(article);
+                Alert alert = new Alert(INFORMATION);
+                alert.setHeaderText("Success!");
+                alert.setContentText("Article has been added successfully");
+                alert.showAndWait();
+
+                clearArticlesInput();
             } else {
                 Alert alert = new Alert(ERROR);
                 alert.setHeaderText("Invalid input!");
@@ -350,5 +404,28 @@ public class Home {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private boolean validateAddArticleInput() {
+        if (articlesDatePickerInput.getValue() == null || articleNameInput.getText().isEmpty() || propertyNumberInput.getText().isEmpty() || remarksInput.getText().isEmpty()) {
+            return false;
+        }
+
+        try {
+            Integer.parseInt(articleQuantityInput.getText());
+            Double.parseDouble(unitCostInput.getText());
+        } catch (NumberFormatException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private void clearArticlesInput() {
+        articleNameInput.clear();
+        propertyNumberInput.clear();
+        articleQuantityInput.clear();
+        unitCostInput.clear();
+        remarksInput.clear();
     }
 }

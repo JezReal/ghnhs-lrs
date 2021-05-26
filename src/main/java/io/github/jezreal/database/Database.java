@@ -1,5 +1,6 @@
 package io.github.jezreal.database;
 
+import io.github.jezreal.model.Article;
 import io.github.jezreal.model.Book;
 import io.github.jezreal.model.BookToReturn;
 import io.github.jezreal.model.Transaction;
@@ -302,5 +303,28 @@ public class Database {
     public static void returnBook(int transactionId, int bookId, int quantity) {
         updateBook(bookId, quantity);
         updateTransaction(transactionId);
+    }
+
+    public static void addArticle(Article article) {
+        Connection connection = getConnection();
+
+        LocalDate dateAcquired = article.getDateAcquired();
+        String articleName = article.getArticleName();
+        String propertyNumber = article.getPropertyNumber();
+        int quantity = article.getQuantity();
+        double unitCost = article.getUnitCost();
+        double totalCost = article.getTotalCost();
+        String remarks = article.getRemarks();
+
+        String query = "INSERT INTO articles_table (date_acquired, article_name, property_number, quantity, unit_cost, total_cost, remarks) VALUES ('" + dateAcquired + "','" + articleName + "','" + propertyNumber + "','" + quantity + "','" + unitCost + "','" + totalCost + "','" + remarks + "')";
+        try {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(query);
+
+        } catch (SQLException e) {
+            System.out.println("article query error");
+        }
+
+
     }
 }

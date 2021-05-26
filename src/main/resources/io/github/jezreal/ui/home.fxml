@@ -6,6 +6,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,6 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
@@ -44,13 +46,25 @@
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="addRecordButton" layoutY="190.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.bottomAnchor="329.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="557.0" AnchorPane.topAnchor="190.0">
+                  <Button fx:id="addRecordButton" layoutY="190.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="195.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></Button>
+                  <Line endX="570.0" fill="#52688f" opacity="0.2" startX="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="270.0" />
+                  <DatePicker fx:id="articlesDatePickerInput" prefHeight="32.0" prefWidth="175.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="320.0" />
+                  <TextField fx:id="articleNameInput" prefHeight="33.0" prefWidth="378.0" promptText="Particular/Article" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="370.0" />
+                  <TextField fx:id="propertyNumberInput" prefHeight="33.0" prefWidth="378.0" promptText="Property number/Code" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="420.0" />
+                  <TextField fx:id="articleQuantityInput" layoutX="422.0" prefHeight="33.0" prefWidth="189.0" promptText="Quantity" AnchorPane.leftAnchor="220.0" AnchorPane.topAnchor="320.0" />
+                  <TextField fx:id="unitCostInput" layoutX="423.0" prefHeight="33.0" prefWidth="176.0" promptText="Unit cost" AnchorPane.leftAnchor="423.0" AnchorPane.topAnchor="320.0" />
+                  <TextArea fx:id="remarksInput" prefHeight="85.0" prefWidth="175.0" promptText="Remarks" AnchorPane.leftAnchor="424.0" AnchorPane.topAnchor="370.0" />
+                  <Button fx:id="addArticleButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="470.0">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="borrowBooksPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="borrowBooksPage" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="70.0">
                      <image>
@@ -89,7 +103,7 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="viewRecordsPage" prefHeight="200.0" prefWidth="313.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="viewRecordsPage" opacity="0.0" prefHeight="200.0" prefWidth="313.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="70.0">
                      <image>
@@ -120,7 +134,7 @@
                   </TableView>
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="aboutPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="aboutPage" opacity="0.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="70.0">
                      <image>
