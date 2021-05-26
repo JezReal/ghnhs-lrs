@@ -15,7 +15,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("prototype/prototype.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("ui/home.fxml"));
 
         Parent root = fxmlLoader.load();
