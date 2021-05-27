@@ -159,17 +159,23 @@
             </AnchorPane>
             <AnchorPane fx:id="aboutPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
+                  <Pane prefHeight="70.0" prefWidth="200.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="About" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="25.0">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Text>
                   <ImageView fitHeight="582.0" fitWidth="541.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
                      <image>
                         <Image url="@../images/school_logo.png" />
                      </image>
                   </ImageView>
-                  <Text layoutX="220.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LRS" AnchorPane.bottomAnchor="413.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="601.86328125" AnchorPane.topAnchor="50.0">
+                  <Text layoutX="220.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LRS" AnchorPane.bottomAnchor="413.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="601.86328125" AnchorPane.topAnchor="100.0">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
                   </Text>
-                  <TextFlow layoutX="54.0" layoutY="89.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="89.0">
+                  <TextFlow layoutX="54.0" layoutY="89.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.leftAnchor="54.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="130.0">
                      <children>
                         <Text lineSpacing="2.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LRS - Learning Record System is a simple book management system that is developed for Gordon Heights National High School">
                            <font>
