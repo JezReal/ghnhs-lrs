@@ -113,7 +113,6 @@ public class Database {
 
         formatter.format("UPDATE books_table SET description='%s', quantity='%d' WHERE id='%d'", book.getDescription(), book.getQuantity(), book.getId());
 
-
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(stringBuilder.toString());
@@ -133,7 +132,6 @@ public class Database {
 
         formatter.format("UPDATE books_table SET quantity='%d' WHERE id='%d'", newQuantity, bookId);
 
-        System.out.println("Update book: " + stringBuilder);
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(stringBuilder.toString());
@@ -262,7 +260,6 @@ public class Database {
 
         String query = "UPDATE transactions_table SET date_returned='" + LocalDate.now() + "'" + "WHERE transaction_id='" + transactionId + "'";
 
-        System.out.println("Update transaction: " + query);
         try {
             Statement statement = connection.createStatement();
             statement.executeUpdate(query);
