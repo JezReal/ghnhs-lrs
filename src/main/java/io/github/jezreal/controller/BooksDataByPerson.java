@@ -14,7 +14,7 @@ import java.time.LocalDate;
 
 import static javafx.scene.control.Alert.AlertType.ERROR;
 
-public class BooksDataByPersonController {
+public class BooksDataByPerson {
 
     @FXML
     private TableView<Transaction> booksDataByPersonTable;
