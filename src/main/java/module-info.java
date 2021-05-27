@@ -5,7 +5,6 @@ module io.github.jezreal {
     requires mysql.connector.java;
 
     opens io.github.jezreal.controller to javafx.fxml;
-    opens io.github.jezreal.prototype to javafx.fxml;
     opens io.github.jezreal.model to javafx.base;
 
     exports io.github.jezreal.main;
