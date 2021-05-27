@@ -48,12 +48,6 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>io.github.jezreal.App</mainClass>
-                            <launcher>lrs-launcher</launcher>
-                            <compress>2</compress>
-                            <jlinkZipName>ghnhs-lrs</jlinkZipName>
-                            <jlinkImageName>ghnhs-lrs</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
                     </execution>
                 </executions>
