@@ -25,39 +25,49 @@
          <children>
             <AnchorPane fx:id="addRecordPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="477.0" fitWidth="485.0" layoutX="103.0" layoutY="69.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
+                  <ImageView fitHeight="582.0" fitWidth="541.0" layoutX="56.0" layoutY="69.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
                      <image>
                         <Image url="@../images/school_logo.png" />
                      </image>
                   </ImageView>
                   <Pane prefHeight="70.0" prefWidth="654.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new book" AnchorPane.bottomAnchor="463.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="569.5546875" AnchorPane.topAnchor="25.0">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Add new book/article" AnchorPane.bottomAnchor="463.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="569.5546875" AnchorPane.topAnchor="25.0">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="descriptionInput" layoutY="193.0" prefHeight="33.0" prefWidth="400.0" promptText="Description" AnchorPane.bottomAnchor="417.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="224.0" AnchorPane.topAnchor="100.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add book" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="descriptionInput" layoutY="193.0" prefHeight="33.0" prefWidth="400.0" promptText="Description" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="175.0">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                  <TextField fx:id="quantityInput" prefHeight="31.0" prefWidth="225.0" promptText="Quantity" AnchorPane.bottomAnchor="369.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="399.0" AnchorPane.topAnchor="150.0">
+                  <TextField fx:id="quantityInput" prefHeight="31.0" prefWidth="225.0" promptText="Quantity" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="220.0">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="addRecordButton" layoutY="190.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="195.0">
+                  <Button fx:id="addRecordButton" layoutY="190.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="265.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></Button>
-                  <Line endX="570.0" fill="#52688f" opacity="0.2" startX="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="270.0" />
-                  <DatePicker fx:id="articlesDatePickerInput" prefHeight="32.0" prefWidth="175.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="320.0" />
-                  <TextField fx:id="articleNameInput" prefHeight="33.0" prefWidth="401.0" promptText="Particular/Article" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="370.0" />
-                  <TextField fx:id="propertyNumberInput" prefHeight="33.0" prefWidth="400.0" promptText="Property number/Code" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="420.0" />
-                  <TextField fx:id="articleQuantityInput" layoutX="422.0" prefHeight="33.0" prefWidth="189.0" promptText="Quantity" AnchorPane.leftAnchor="243.0" AnchorPane.topAnchor="320.0" />
-                  <TextField fx:id="unitCostInput" layoutX="423.0" prefHeight="33.0" prefWidth="219.0" promptText="Unit cost" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="320.0" />
-                  <TextArea fx:id="remarksInput" prefHeight="85.0" prefWidth="219.0" promptText="Remarks" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="370.0" />
-                  <Button fx:id="addArticleButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="470.0">
+                  <Line endX="650.0" fill="#52688f" opacity="0.2" startX="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="330.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Add particular/article" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="370.0">
+                     <font>
+                        <Font name="Arial Bold" size="20.0" />
+                     </font>
+                  </Text>
+                  <DatePicker fx:id="articlesDatePickerInput" prefHeight="32.0" prefWidth="175.0" promptText="Date acquired" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="420.0" />
+                  <TextField fx:id="articleNameInput" prefHeight="33.0" prefWidth="401.0" promptText="Particular/Article" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="465.0" />
+                  <TextField fx:id="propertyNumberInput" prefHeight="33.0" prefWidth="400.0" promptText="Property number/Code" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="510.0" />
+                  <TextField fx:id="articleQuantityInput" layoutX="422.0" prefHeight="33.0" prefWidth="189.0" promptText="Quantity" AnchorPane.leftAnchor="243.0" AnchorPane.topAnchor="420.0" />
+                  <TextField fx:id="unitCostInput" layoutX="423.0" prefHeight="33.0" prefWidth="219.0" promptText="Unit cost" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="420.0" />
+                  <TextArea fx:id="remarksInput" prefHeight="85.0" prefWidth="219.0" promptText="Remarks" AnchorPane.leftAnchor="470.0" AnchorPane.topAnchor="465.0" />
+                  <Button fx:id="addArticleButton" mnemonicParsing="false" prefHeight="31.0" prefWidth="67.0" text="Add" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="555.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -66,7 +76,7 @@
             </AnchorPane>
             <AnchorPane fx:id="borrowBooksPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
+                  <ImageView fitHeight="582.0" fitWidth="541.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
                      <image>
                         <Image url="@../images/school_logo.png" />
                      </image>
@@ -77,31 +87,32 @@
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Borrow book/s" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="100.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Borrow book/s" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="firstNameInput" prefHeight="33.0" prefWidth="250.0" promptText="First name" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="140.0" />
-                  <TextField fx:id="lastNameInput" prefHeight="33.0" prefWidth="250.0" promptText="Last name" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="185.0" />
-                  <DatePicker fx:id="datePickerInput" prefHeight="33.0" promptText="Enter date" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="230.0" />
-                  <Button fx:id="selectBooksButton" layoutY="273.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" text="Select book/s" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="280.0">
+                  <TextField fx:id="firstNameInput" prefHeight="33.0" prefWidth="250.0" promptText="First name" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="170.0" />
+                  <TextField fx:id="lastNameInput" prefHeight="33.0" prefWidth="250.0" promptText="Last name" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="220.0" />
+                  <DatePicker fx:id="datePickerInput" prefHeight="33.0" promptText="Enter date" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="270.0" />
+                  <Button fx:id="selectBooksButton" layoutY="273.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="99.0" text="Select book/s" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="315.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
                   </Button>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Return book/s" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="350.0">
+                  <Line endX="650.0" opacity="0.2" startX="50.0" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="50.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Return book/s" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="420.0">
                      <font>
                         <Font name="Arial Bold" size="20.0" />
                      </font>
                   </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="390.0">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="460.0">
                      <font>
                         <Font name="Arial" size="14.0" />
                      </font>
                   </Text>
-                  <ComboBox fx:id="namesCombobox" layoutY="376.0" prefHeight="29.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="420.0" />
-                  <Button fx:id="selectReturnButton" layoutY="508.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="103.0" text="Select book/s" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="465.0">
+                  <ComboBox fx:id="namesCombobox" layoutY="376.0" prefHeight="29.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="490.0" />
+                  <Button fx:id="selectReturnButton" layoutY="508.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="103.0" text="Select book/s" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="530.0">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -110,7 +121,7 @@
             </AnchorPane>
             <AnchorPane fx:id="viewRecordsPage" prefHeight="200.0" prefWidth="313.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
+                  <ImageView fitHeight="582.0" fitWidth="541.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
                      <image>
                         <Image url="@../images/school_logo.png" />
                      </image>
@@ -148,7 +159,7 @@
             </AnchorPane>
             <AnchorPane fx:id="aboutPage" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <ImageView fitHeight="477.0" fitWidth="485.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="70.0">
+                  <ImageView fitHeight="582.0" fitWidth="541.0" opacity="0.26" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="70.0">
                      <image>
                         <Image url="@../images/school_logo.png" />
                      </image>
