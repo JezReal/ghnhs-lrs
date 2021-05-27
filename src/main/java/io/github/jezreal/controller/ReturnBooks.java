@@ -129,7 +129,6 @@ public class ReturnBooks {
                 alert.showAndWait();
 
                 homeController.loadBooksTableData();
-                homeController.clearReturnBooksInput();
                 homeController.loadNamesComboBox();
                 dismissWindow();
             }
