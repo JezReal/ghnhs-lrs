@@ -171,6 +171,7 @@ public class Home {
             viewRecordsPage.setVisible(false);
             aboutPage.setVisible(false);
 
+            clearBorrowBooksInput();
             loadNamesComboBox();
         });
 
@@ -180,7 +181,6 @@ public class Home {
             viewRecordsPage.setVisible(true);
             aboutPage.setVisible(false);
             loadBooksTableData();
-            loadBorrowedBooksTableData();
             loadArticlesData();
             loadTeacherNamesComboBox();
         });
@@ -193,7 +193,6 @@ public class Home {
         });
 
         loadBooksTableData();
-        loadBorrowedBooksTableData();
         loadArticlesData();
         loadNamesComboBox();
         loadTeacherNamesComboBox();
@@ -241,11 +240,6 @@ public class Home {
     public void loadBooksTableData() {
         books = Database.getAllBooks();
         recordsTable.setItems(books);
-    }
-
-    public void loadBorrowedBooksTableData() {
-//        transactions = Database.getAllTransactions();
-//        borrowedBooksTable.setItems(transactions);
     }
 
     public void loadNamesComboBox() {
@@ -500,5 +494,9 @@ public class Home {
 
             }
         }
+    }
+
+    public void clearReturnBooksInput() {
+
     }
 }
