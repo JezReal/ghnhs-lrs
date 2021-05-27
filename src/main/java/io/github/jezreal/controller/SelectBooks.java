@@ -10,9 +10,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class SelectBooks {
 
@@ -120,7 +123,14 @@ public class SelectBooks {
                     Book book = borrowedBooks.get(i);
                     int quantity = borrowedBooks.get(i).getQuantity();
 
-                    Database.addBorrowedBook(firstName.trim(), lastName.trim(), date, currentId, quantity, book);
+                    try {
+                        Database.addBorrowedBook(firstName.trim(), lastName.trim(), date, currentId, quantity, book);
+                    } catch (SQLException | ClassNotFoundException e) {
+                        Alert alert = new Alert(ERROR);
+                        alert.setHeaderText("SQL Error!");
+                        alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                        alert.showAndWait();
+                    }
                 }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import static javafx.scene.control.Alert.AlertType.ERROR;
@@ -238,12 +239,28 @@ public class Home {
     }
 
     public void loadBooksTableData() {
-        books = Database.getAllBooks();
+        try {
+            books = Database.getAllBooks();
+        } catch (SQLException | ClassNotFoundException e) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("SQL Error!");
+            alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+            alert.showAndWait();
+        }
+
         recordsTable.setItems(books);
     }
 
     public void loadNamesComboBox() {
-        unreturnedTransactions = Database.getUniqueUnreturnedTransactions();
+        try {
+            unreturnedTransactions = Database.getUniqueUnreturnedTransactions();
+        } catch (SQLException | ClassNotFoundException e) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("SQL Error!");
+            alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+            alert.showAndWait();
+        }
+
         unreturnedTransactionNames = FXCollections.observableArrayList();
 
         for (Transaction transaction : unreturnedTransactions) {
@@ -279,7 +296,14 @@ public class Home {
                 String description = descriptionInput.getText();
                 int quantity = Integer.parseInt(quantityInput.getText());
 
-                Database.addBook(new Book(description, quantity));
+                try {
+                    Database.addBook(new Book(description, quantity));
+                } catch (SQLException | ClassNotFoundException e) {
+                    Alert alert = new Alert(ERROR);
+                    alert.setHeaderText("SQL Error!");
+                    alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                    alert.showAndWait();
+                }
 
                 descriptionInput.clear();
                 quantityInput.clear();
@@ -312,7 +336,15 @@ public class Home {
                         remarksInput.getText()
                 );
 
-                Database.addArticle(article);
+                try {
+                    Database.addArticle(article);
+                } catch (SQLException | ClassNotFoundException e) {
+                    Alert alert = new Alert(ERROR);
+                    alert.setHeaderText("SQL Error!");
+                    alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                    alert.showAndWait();
+                }
+
                 Alert alert = new Alert(INFORMATION);
                 alert.setHeaderText("Success!");
                 alert.setContentText("Article has been added successfully");
@@ -341,30 +373,40 @@ public class Home {
             Parent root = fxmlLoader.load();
 
             SelectBooks selectBooks = fxmlLoader.getController();
+            ObservableList<Book> availableBooks = null;
 
-            ObservableList<Book> availableBooks = Database.getAvailableBooks();
-
-            if (availableBooks.isEmpty()) {
-                Alert alert = new Alert(INFORMATION);
-                alert.setHeaderText("Empty");
-                alert.setContentText("There are no available books to be borrowed");
-                alert.showAndWait();
-            } else if (!validateBorrowBookInput()) {
+            try {
+                availableBooks = Database.getAvailableBooks();
+            } catch (SQLException | ClassNotFoundException e) {
                 Alert alert = new Alert(ERROR);
-                alert.setHeaderText("Invalid input");
-                alert.setContentText("Invalid input. Please check your input");
+                alert.setHeaderText("SQL Error!");
+                alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                 alert.showAndWait();
-            } else {
-                selectBooks.setData(availableBooks, firstNameInput.getText(), lastNameInput.getText(), datePickerInput.getValue());
-                selectBooks.setHomeController(this);
+            }
 
-                Scene scene = new Scene(root);
-                Stage stage = new Stage();
+            if (availableBooks != null) {
+                if (availableBooks.isEmpty()) {
+                    Alert alert = new Alert(INFORMATION);
+                    alert.setHeaderText("Empty");
+                    alert.setContentText("There are no available books to be borrowed");
+                    alert.showAndWait();
+                } else if (!validateBorrowBookInput()) {
+                    Alert alert = new Alert(ERROR);
+                    alert.setHeaderText("Invalid input");
+                    alert.setContentText("Invalid input. Please check your input");
+                    alert.showAndWait();
+                } else {
+                    selectBooks.setData(availableBooks, firstNameInput.getText(), lastNameInput.getText(), datePickerInput.getValue());
+                    selectBooks.setHomeController(this);
 
-                stage.setScene(scene);
-                stage.setTitle("Select books");
-                stage.setResizable(false);
-                stage.show();
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.setTitle("Select books");
+                    stage.setResizable(false);
+                    stage.show();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -448,12 +490,28 @@ public class Home {
     }
 
     private void loadArticlesData() {
-        articles = Database.getAllArticles();
+        try {
+            articles = Database.getAllArticles();
+        } catch (SQLException | ClassNotFoundException e) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("SQL Error!");
+            alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+            alert.showAndWait();
+        }
+
         articlesTable.setItems(articles);
     }
 
     private void loadTeacherNamesComboBox() {
-        teacherNames = Database.getUniqueTransactions();
+        try {
+            teacherNames = Database.getUniqueTransactions();
+        } catch (SQLException | ClassNotFoundException e) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("SQL Error!");
+            alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+            alert.showAndWait();
+        }
+
         teacherNamesString = FXCollections.observableArrayList();
 
         for (Transaction transaction : teacherNames) {

@@ -12,7 +12,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+
+import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class ReturnBooks {
 
@@ -56,7 +59,14 @@ public class ReturnBooks {
     }
 
     private void loadCombobox() {
-        booksToReturn = Database.getBooksToReturn(firstName, lastName);
+        try {
+            booksToReturn = Database.getBooksToReturn(firstName, lastName);
+        } catch (SQLException | ClassNotFoundException e) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("SQL Error!");
+            alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+            alert.showAndWait();
+        }
 
 
         for (BookToReturn book : booksToReturn) {
@@ -103,7 +113,14 @@ public class ReturnBooks {
                     int bookId = book.getBookId();
                     int quantity = book.getQuantityBorrowed();
 
-                    Database.returnBook(transactionId, bookId, quantity);
+                    try {
+                        Database.returnBook(transactionId, bookId, quantity);
+                    } catch (SQLException | ClassNotFoundException e) {
+                        Alert alert = new Alert(ERROR);
+                        alert.setHeaderText("SQL Error!");
+                        alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                        alert.showAndWait();
+                    }
                 }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);

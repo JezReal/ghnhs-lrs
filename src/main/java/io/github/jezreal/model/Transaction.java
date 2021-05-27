@@ -1,8 +1,12 @@
 package io.github.jezreal.model;
 
 import io.github.jezreal.database.Database;
+import javafx.scene.control.Alert;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
+
+import static javafx.scene.control.Alert.AlertType.ERROR;
 
 public class Transaction {
 
@@ -33,7 +37,11 @@ public class Transaction {
         this.dateReturned = dateReturned;
         this.quantity = quantity;
 
-        this.bookBorrowed = Database.getBook(bookId).getDescription();
+        try {
+            this.bookBorrowed = Database.getBook(bookId).getDescription();
+        } catch (SQLException | ClassNotFoundException e) {
+            this.bookBorrowed = "SQL error please report the issue to the developers";
+        }
     }
 
     public Transaction(
@@ -51,7 +59,11 @@ public class Transaction {
         this.dateBorrowed = dateBorrowed;
         this.quantity = quantity;
 
-        this.bookBorrowed = Database.getBook(bookId).getDescription();
+        try {
+            this.bookBorrowed = Database.getBook(bookId).getDescription();
+        } catch (SQLException | ClassNotFoundException e) {
+            this.bookBorrowed = "SQL error please report the issue to the developers";
+        }
     }
 
     public Transaction(int transactionId, int bookId, String firstName, String lastName) {
@@ -73,7 +85,11 @@ public class Transaction {
         this.dateReturned = dateReturned;
         this.quantity = quantity;
 
-        this.bookBorrowed = Database.getBook(bookId).getDescription();
+        try {
+            this.bookBorrowed = Database.getBook(bookId).getDescription();
+        } catch (SQLException | ClassNotFoundException e) {
+            this.bookBorrowed = "SQL error please report the issue to the developers";
+        }
     }
 
     public Transaction(int transactionId, int bookId, LocalDate dateBorrowed, int quantity) {
@@ -82,7 +98,11 @@ public class Transaction {
         this.dateBorrowed = dateBorrowed;
         this.quantity = quantity;
 
-        this.bookBorrowed = Database.getBook(bookId).getDescription();
+        try {
+            this.bookBorrowed = Database.getBook(bookId).getDescription();
+        } catch (SQLException | ClassNotFoundException e) {
+            this.bookBorrowed = "SQL error please report the issue to the developers";
+        }
     }
 
     public int getTransactionId() {

@@ -9,6 +9,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
+import static javafx.scene.control.Alert.AlertType.ERROR;
+
 public class EditItem {
 
     @FXML
@@ -49,7 +53,14 @@ public class EditItem {
         deleteButton.setVisible(false);
 
         deleteButton.setOnAction(action -> {
-            Database.deleteBook(book.getId());
+            try {
+                Database.deleteBook(book.getId());
+            } catch (SQLException | ClassNotFoundException e) {
+                Alert alert = new Alert(ERROR);
+                alert.setHeaderText("SQL Error!");
+                alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                alert.showAndWait();
+            }
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Success!");
@@ -66,7 +77,14 @@ public class EditItem {
                 Book updatedBook = new Book(descriptionTextfield.getText(), Integer.parseInt(quantityTextField.getText()));
                 updatedBook.setId(book.getId());
 
-                Database.updateBook(updatedBook);
+                try {
+                    Database.updateBook(updatedBook);
+                } catch (SQLException | ClassNotFoundException e) {
+                    Alert alert = new Alert(ERROR);
+                    alert.setHeaderText("SQL Error!");
+                    alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                    alert.showAndWait();
+                }
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Success!");
