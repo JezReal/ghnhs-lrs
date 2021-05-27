@@ -16,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -533,7 +532,7 @@ public class Home {
                 FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("ui/books_data_by_person.fxml"));
                 Parent root = fxmlLoader.load();
 
-                BooksDataByPersonController controller = fxmlLoader.getController();
+                BooksDataByPerson controller = fxmlLoader.getController();
 
                 //get first name and last name by using the index
                 int index = teacherNamesCombobox.getSelectionModel().getSelectedIndex();
@@ -552,9 +551,5 @@ public class Home {
 
             }
         }
-    }
-
-    public void clearReturnBooksInput() {
-
     }
 }
