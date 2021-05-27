@@ -139,14 +139,11 @@ public class Home {
     private ObservableList<Transaction> unreturnedTransactions;
     private ObservableList<String> unreturnedTransactionNames;
 
-    private ObservableList<Transaction> transactions;
-
     private ObservableList<Book> books;
 
     private ObservableList<Article> articles;
 
     private ObservableList<Transaction> teacherNames;
-    private ObservableList<String> teacherNamesString;
 
     public void initialize() {
 
@@ -511,7 +508,7 @@ public class Home {
             alert.showAndWait();
         }
 
-        teacherNamesString = FXCollections.observableArrayList();
+        ObservableList<String> teacherNamesString = FXCollections.observableArrayList();
 
         for (Transaction transaction : teacherNames) {
             String name = transaction.getLastName() + ", " + transaction.getFirstName();

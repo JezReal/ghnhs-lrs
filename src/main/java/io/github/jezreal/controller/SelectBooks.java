@@ -43,7 +43,6 @@ public class SelectBooks {
 
     private Home homeController;
 
-    private ObservableList<String> availableBooks;
     private ObservableList<Book> books;
     private List<Book> borrowedBooks;
     private List<Integer> borrowedIds;
@@ -60,7 +59,7 @@ public class SelectBooks {
     }
 
     public void setData(ObservableList<Book> books, String firstName, String lastName, LocalDate date) {
-        availableBooks = FXCollections.observableArrayList();
+        ObservableList<String> availableBooks = FXCollections.observableArrayList();
         this.books = books;
 
         this.firstName = firstName;
@@ -145,13 +144,11 @@ public class SelectBooks {
             }
         });
 
-        booksCombobox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> {
-            setQuantityText();
-        });
+        booksCombobox.getSelectionModel().selectedItemProperty().addListener((options, oldValue, newValue) -> setQuantityText());
     }
 
     private boolean validateInput() {
-        int quantity = 0;
+        int quantity;
 
         try {
             quantity = Integer.parseInt(quantityInput.getText());
