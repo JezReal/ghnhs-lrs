@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +25,9 @@ import static javafx.scene.control.Alert.AlertType.ERROR;
 import static javafx.scene.control.Alert.AlertType.INFORMATION;
 
 public class Home {
+
+    @FXML
+    private BorderPane home;
 
     @FXML
     private AnchorPane addRecordPage;
@@ -147,6 +151,8 @@ public class Home {
 
     public void initialize() {
 
+        testDatabaseConnection();
+
         addRecordPage.setVisible(false);
         aboutPage.setVisible(false);
         borrowBooksPage.setVisible(false);
@@ -194,6 +200,8 @@ public class Home {
         loadNamesComboBox();
         loadTeacherNamesComboBox();
         setupTables();
+
+
     }
 
     private void setupTables() {
@@ -547,6 +555,20 @@ public class Home {
             } catch (IOException ignored) {
 
             }
+        }
+    }
+
+    private void testDatabaseConnection() {
+        try {
+            Database.getConnection();
+        } catch (SQLException | ClassNotFoundException e) {
+            Alert alert = new Alert(ERROR);
+            alert.setHeaderText("Connection Error!");
+            alert.setContentText("Cannot connect to database. Please make sure the database is configured properly.");
+            alert.showAndWait();
+
+            Stage stage = (Stage) home.getScene().getWindow();
+            stage.close();
         }
     }
 }

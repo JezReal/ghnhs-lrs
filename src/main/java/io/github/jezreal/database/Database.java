@@ -19,7 +19,7 @@ public class Database {
     private static final String USER = "lrs-client";
     private static final String PASSWORD = "";
 
-    private static Connection getConnection() throws SQLException, ClassNotFoundException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
         if (connection == null) {
             Class.forName(DB_DRIVER);
             connection = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
