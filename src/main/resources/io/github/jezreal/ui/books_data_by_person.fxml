@@ -15,7 +15,7 @@
             <Font name="Arial Bold" size="20.0" />
          </font>
       </Text>
-      <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Martin, Jezreel" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="25.0">
+      <Text fx:id="nameText" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Martin, Jezreel" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="25.0">
          <font>
             <Font name="Arial" size="20.0" />
          </font>

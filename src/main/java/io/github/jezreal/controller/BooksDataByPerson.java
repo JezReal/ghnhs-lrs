@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -31,6 +32,9 @@ public class BooksDataByPerson {
     @FXML
     private TableColumn<Transaction, Integer> quantityColumn;
 
+    @FXML
+    private Text nameText;
+
     public void initialize() {
         bookBorrowedColumn.setCellValueFactory(
                 new PropertyValueFactory<>("bookBorrowed")
@@ -52,6 +56,8 @@ public class BooksDataByPerson {
 
     public void setData(String firstName, String lastName) {
         ObservableList<Transaction> transaction = null;
+
+        nameText.setText(lastName + ", " + firstName);
 
         try {
             transaction = Database.getTransactionsByName(firstName, lastName);
