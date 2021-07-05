@@ -93,6 +93,7 @@ public class ReturnBooks {
             int index = booksCombobox.getSelectionModel().getSelectedIndex();
             BookToReturn book = booksToReturn.get(index);
 
+            booksToReturn.remove(index);
             booksToReturnNames.remove(index);
             booksCombobox.setItems(booksToReturnNames);
 
