@@ -68,9 +68,10 @@ public class ReturnBooks {
             alert.showAndWait();
         }
 
-
         for (BookToReturn book : booksToReturn) {
-            booksToReturnNames.add(book.getDescription());
+            if (!booksToReturnNames.contains(book.getDescription())) {
+                booksToReturnNames.add(book.getDescription());
+            }
         }
 
         booksCombobox.setItems(booksToReturnNames);
@@ -109,12 +110,20 @@ public class ReturnBooks {
                 alert.showAndWait();
             } else {
                 for (BookToReturn book : returnees) {
-                    int transactionId = book.getTransactionId();
                     int bookId = book.getBookId();
-                    int quantity = book.getQuantityBorrowed();
+                    int totalQuantity = 0;
 
                     try {
-                        Database.returnBook(transactionId, bookId, quantity);
+                        totalQuantity = Database.getTotalQuantityOfBorrowedBook(firstName, lastName, bookId);
+                    } catch (SQLException | ClassNotFoundException e) {
+                        Alert alert = new Alert(ERROR);
+                        alert.setHeaderText("SQL Error!");
+                        alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
+                        alert.showAndWait();
+                    }
+
+                    try {
+                        Database.returnBook(firstName, lastName, bookId, totalQuantity);
                     } catch (SQLException | ClassNotFoundException e) {
                         Alert alert = new Alert(ERROR);
                         alert.setHeaderText("SQL Error!");

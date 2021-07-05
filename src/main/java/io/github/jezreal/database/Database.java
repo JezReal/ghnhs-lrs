@@ -232,9 +232,9 @@ public class Database {
         return booksToReturn;
     }
 
-    public static void returnBook(int transactionId, int bookId, int quantity) throws SQLException, ClassNotFoundException {
+    public static void returnBook(String firstName, String lastName,int bookId, int quantity) throws SQLException, ClassNotFoundException {
         updateBook(bookId, quantity);
-        updateTransaction(transactionId);
+        updateTransactionByName(firstName, lastName, bookId);
     }
 
     public static void addArticle(Article article) throws SQLException, ClassNotFoundException {
@@ -342,5 +342,25 @@ public class Database {
         }
 
         return transactions;
+    }
+
+    public static int getTotalQuantityOfBorrowedBook(String firstName, String lastName, int bookId) throws SQLException, ClassNotFoundException {
+        int sum = 0;
+
+        Connection connection = getConnection();
+        StringBuilder stringBuilder = new StringBuilder();
+        Formatter formatter = new Formatter(stringBuilder);
+
+        formatter.format("SELECT quantity_borrowed FROM transactions_table WHERE first_name='%s' AND last_name='%s' AND book_id='%d' AND date_returned is NULL", firstName, lastName, bookId);
+
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
+
+        while(resultSet.next()) {
+            int currentQuantity = resultSet.getInt("quantity_borrowed");
+            sum += currentQuantity;
+        }
+
+        return sum;
     }
 }
