@@ -130,6 +130,7 @@ public class ReturnBooks {
                         alert.setHeaderText("SQL Error!");
                         alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                         alert.showAndWait();
+                        return;
                     }
                 }
 

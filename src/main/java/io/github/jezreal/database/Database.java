@@ -232,9 +232,23 @@ public class Database {
         return booksToReturn;
     }
 
-    public static void returnBook(String firstName, String lastName,int bookId, int quantity) throws SQLException, ClassNotFoundException {
+    public static void returnBook(String firstName, String lastName, int bookId, int quantity) throws SQLException, ClassNotFoundException {
         updateBook(bookId, quantity);
         updateTransactionByName(firstName, lastName, bookId);
+    }
+
+    private static void updateTransactionByName(String firstName, String lastName, int bookId) throws SQLException, ClassNotFoundException {
+        Connection connection = getConnection();
+
+        LocalDate dateReturned = LocalDate.now();
+
+        PreparedStatement statement = connection.prepareStatement("UPDATE transactions_table SET date_returned = ? WHERE first_name = ? AND last_name = ? AND book_id = ?");
+        statement.setDate(1, Date.valueOf(dateReturned));
+        statement.setString(2, firstName);
+        statement.setString(3, lastName);
+        statement.setInt(4, bookId);
+
+        statement.executeUpdate();
     }
 
     public static void addArticle(Article article) throws SQLException, ClassNotFoundException {
@@ -250,6 +264,7 @@ public class Database {
 
         String query = "INSERT INTO articles_table (date_acquired, article_name, property_number, quantity, unit_cost, total_cost, remarks) VALUES ('" + dateAcquired + "','" + articleName + "','" + propertyNumber + "','" + quantity + "','" + unitCost + "','" + totalCost + "','" + remarks + "')";
 
+//        TODO: use prepared statements not this abomination
         Statement statement = connection.createStatement();
         statement.executeUpdate(query);
     }
