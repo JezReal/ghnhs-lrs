@@ -66,6 +66,7 @@ public class BooksDataByPerson {
             alert.setHeaderText("SQL Error!");
             alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
             alert.showAndWait();
+            return;
         }
 
         booksDataByPersonTable.setItems(transaction);

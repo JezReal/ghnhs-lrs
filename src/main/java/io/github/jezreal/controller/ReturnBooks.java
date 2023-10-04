@@ -66,6 +66,8 @@ public class ReturnBooks {
             alert.setHeaderText("SQL Error!");
             alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
             alert.showAndWait();
+            e.printStackTrace();
+            return;
         }
 
         for (BookToReturn book : booksToReturn) {
@@ -121,6 +123,8 @@ public class ReturnBooks {
                         alert.setHeaderText("SQL Error!");
                         alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                         alert.showAndWait();
+                        e.printStackTrace();
+                        return;
                     }
 
                     try {
@@ -130,6 +134,7 @@ public class ReturnBooks {
                         alert.setHeaderText("SQL Error!");
                         alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                         alert.showAndWait();
+                        e.printStackTrace();
                         return;
                     }
                 }

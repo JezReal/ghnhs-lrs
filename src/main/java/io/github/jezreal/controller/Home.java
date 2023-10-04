@@ -250,6 +250,8 @@ public class Home {
             alert.setHeaderText("SQL Error!");
             alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
             alert.showAndWait();
+            e.printStackTrace();
+            return;
         }
 
         recordsTable.setItems(books);
@@ -263,6 +265,8 @@ public class Home {
             alert.setHeaderText("SQL Error!");
             alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
             alert.showAndWait();
+            e.printStackTrace();
+            return;
         }
 
         unreturnedTransactionNames = FXCollections.observableArrayList();
@@ -307,6 +311,8 @@ public class Home {
                     alert.setHeaderText("SQL Error!");
                     alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                     alert.showAndWait();
+                    e.printStackTrace();
+                    return;
                 }
 
                 descriptionInput.clear();
@@ -347,6 +353,8 @@ public class Home {
                     alert.setHeaderText("SQL Error!");
                     alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                     alert.showAndWait();
+                    e.printStackTrace();
+                    return;
                 }
 
                 Alert alert = new Alert(INFORMATION);
@@ -386,31 +394,31 @@ public class Home {
                 alert.setHeaderText("SQL Error!");
                 alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
                 alert.showAndWait();
+                e.printStackTrace();
+                return;
             }
 
-            if (availableBooks != null) {
-                if (availableBooks.isEmpty()) {
-                    Alert alert = new Alert(INFORMATION);
-                    alert.setHeaderText("Empty");
-                    alert.setContentText("There are no available books to be borrowed");
-                    alert.showAndWait();
-                } else if (!validateBorrowBookInput()) {
-                    Alert alert = new Alert(ERROR);
-                    alert.setHeaderText("Invalid input");
-                    alert.setContentText("Invalid input. Please check your input");
-                    alert.showAndWait();
-                } else {
-                    selectBooks.setData(availableBooks, firstNameInput.getText(), lastNameInput.getText(), datePickerInput.getValue());
-                    selectBooks.setHomeController(this);
+            if (availableBooks.isEmpty()) {
+                Alert alert = new Alert(INFORMATION);
+                alert.setHeaderText("Empty");
+                alert.setContentText("There are no available books to be borrowed");
+                alert.showAndWait();
+            } else if (!validateBorrowBookInput()) {
+                Alert alert = new Alert(ERROR);
+                alert.setHeaderText("Invalid input");
+                alert.setContentText("Invalid input. Please check your input");
+                alert.showAndWait();
+            } else {
+                selectBooks.setData(availableBooks, firstNameInput.getText(), lastNameInput.getText(), datePickerInput.getValue());
+                selectBooks.setHomeController(this);
 
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
 
-                    stage.setScene(scene);
-                    stage.setTitle("Select books");
-                    stage.setResizable(false);
-                    stage.show();
-                }
+                stage.setScene(scene);
+                stage.setTitle("Select books");
+                stage.setResizable(false);
+                stage.show();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -501,6 +509,8 @@ public class Home {
             alert.setHeaderText("SQL Error!");
             alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
             alert.showAndWait();
+            e.printStackTrace();
+            return;
         }
 
         articlesTable.setItems(articles);
@@ -514,6 +524,8 @@ public class Home {
             alert.setHeaderText("SQL Error!");
             alert.setContentText("An unexpected sql error has occurred. Please report the issue to the developers");
             alert.showAndWait();
+            e.printStackTrace();
+            return;
         }
 
         ObservableList<String> teacherNamesString = FXCollections.observableArrayList();
@@ -553,7 +565,7 @@ public class Home {
                 stage.setResizable(false);
                 stage.show();
             } catch (IOException ignored) {
-
+                ignored.printStackTrace();
             }
         }
     }
@@ -566,6 +578,7 @@ public class Home {
             alert.setHeaderText("Connection Error!");
             alert.setContentText("Cannot connect to database. Please make sure the database is configured properly.");
             alert.showAndWait();
+            e.printStackTrace();
 
             Stage stage = (Stage) home.getScene().getWindow();
             stage.close();

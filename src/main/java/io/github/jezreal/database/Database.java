@@ -50,13 +50,9 @@ public class Database {
         Connection connection = getConnection();
         Book book = null;
 
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
-
-        formatter.format("SELECT * FROM books_table WHERE id='%d'", id);
-
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
+        PreparedStatement statement = connection.prepareStatement("SELECT  * FROM books_table WHERE id=?");
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
             int bookId = resultSet.getInt("id");
@@ -71,49 +67,45 @@ public class Database {
 
     public static void addBook(Book book) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("INSERT INTO books_table (description, quantity) VALUES ('%s', '%d')", book.getDescription(), book.getQuantity());
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO books_table (description, quantity) VALUES (?, ?)");
+        statement.setString(1, book.getDescription());
+        statement.setInt(2, book.getQuantity());
 
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(stringBuilder.toString());
+        statement.executeUpdate();
     }
 
     public static void updateBook(Book book) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("UPDATE books_table SET description='%s', quantity='%d' WHERE id='%d'", book.getDescription(), book.getQuantity(), book.getId());
+        PreparedStatement statement = connection.prepareStatement("UPDATE books_table SET description=?, quantity=? WHERE id=?");
+        statement.setString(1, book.getDescription());
+        statement.setInt(2, book.getQuantity());
+        statement.setInt(3, book.getId());
 
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(stringBuilder.toString());
+        statement.executeUpdate();
     }
 
     public static void updateBook(int bookId, int quantity) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
 
         int existingQuantity = getBook(bookId).getQuantity();
         int newQuantity = existingQuantity + quantity;
 
-        formatter.format("UPDATE books_table SET quantity='%d' WHERE id='%d'", newQuantity, bookId);
+        PreparedStatement statement = connection.prepareStatement("UPDATE books_table SET quantity=? WHERE id=?");
+        statement.setInt(1, newQuantity);
+        statement.setInt(2, bookId);
 
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(stringBuilder.toString());
+        statement.executeUpdate();
     }
 
     public static void deleteBook(int id) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("DELETE FROM books_table WHERE id='%d'", id);
+        PreparedStatement statement = connection.prepareStatement("DELETE FROM books_table WHERE id=?");
+        statement.setInt(1, id);
 
-        Statement statement = connection.createStatement();
-        statement.execute(stringBuilder.toString());
+        statement.execute();
     }
 
     public static ObservableList<Book> getAvailableBooks() throws SQLException, ClassNotFoundException {
@@ -136,10 +128,14 @@ public class Database {
 
     public static void addBorrowedBook(String firstName, String lastName, LocalDate date, int id, int quantity, Book book) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
-        String query = "INSERT INTO transactions_table (book_id, first_name, last_name, date_borrowed, quantity_borrowed) VALUES('" + id + "','" + firstName + "','" + lastName + "','" + date + "','" + quantity + "')";
 
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(query);
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO transactions_table (book_id, first_name, last_name, date_borrowed, quantity_borrowed) VALUES (?,?,?,?,?)");
+        statement.setInt(1, id);
+        statement.setString(2, firstName);
+        statement.setString(3, lastName);
+        statement.setDate(4, java.sql.Date.valueOf(date.toString()));
+        statement.setInt(5, quantity);
+        statement.executeUpdate();
 
         int borrowedQuantity = book.getQuantity();
         int originalQuantity = getBook(id).getQuantity();
@@ -202,23 +198,23 @@ public class Database {
     public static void updateTransaction(int transactionId) throws SQLException, ClassNotFoundException {
         Connection connection = getConnection();
 
-        String query = "UPDATE transactions_table SET date_returned='" + LocalDate.now() + "'" + "WHERE transaction_id='" + transactionId + "'";
+        PreparedStatement statement = connection.prepareStatement("UPDATE transactions_table SET date_returned=? WHERE transaction_id=?");
+        statement.setDate(1, java.sql.Date.valueOf(LocalDate.now().toString()));
+        statement.setInt(2, transactionId);
 
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(query);
+        statement.executeUpdate();
     }
 
     public static ObservableList<BookToReturn> getBooksToReturn(String firstName, String lastName) throws SQLException, ClassNotFoundException {
         ObservableList<BookToReturn> booksToReturn = FXCollections.observableArrayList();
 
         Connection connection = getConnection();
-        StringBuilder stringBuilder = new StringBuilder();
-        Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("SELECT transactions_table.transaction_id, transactions_table.book_id, books_table.description, transactions_table.quantity_borrowed FROM books_table JOIN transactions_table ON transactions_table.book_id=books_table.id WHERE transactions_table.first_name='%s' AND transactions_table.last_name='%s' AND transactions_table.date_returned is NULL", firstName, lastName);
+        PreparedStatement statement = connection.prepareStatement("SELECT transactions_table.transaction_id, transactions_table.book_id, books_table.description, transactions_table.quantity_borrowed FROM books_table JOIN transactions_table ON transactions_table.book_id=books_table.id WHERE transactions_table.first_name=? AND transactions_table.last_name=? AND transactions_table.date_returned is NULL");
+        statement.setString(1, firstName);
+        statement.setString(2, lastName);
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
+        ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
             int transactionId = resultSet.getInt("transaction_id");
@@ -262,11 +258,15 @@ public class Database {
         double totalCost = article.getTotalCost();
         String remarks = article.getRemarks();
 
-        String query = "INSERT INTO articles_table (date_acquired, article_name, property_number, quantity, unit_cost, total_cost, remarks) VALUES ('" + dateAcquired + "','" + articleName + "','" + propertyNumber + "','" + quantity + "','" + unitCost + "','" + totalCost + "','" + remarks + "')";
-
-//        TODO: use prepared statements not this abomination
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(query);
+        PreparedStatement statement = connection.prepareStatement("INSERT INTO articles_table (date_acquired, article_name, property_number, quantity, unit_cost, total_cost, remarks) VALUES (?, ?,?,?,?,?,?)");
+        statement.setDate(1, java.sql.Date.valueOf(dateAcquired.toString()));
+        statement.setString(2, articleName);
+        statement.setString(3, propertyNumber);
+        statement.setInt(4, quantity);
+        statement.setDouble(5, unitCost);
+        statement.setDouble(6, totalCost);
+        statement.setString(7, remarks);
+        statement.executeUpdate();
     }
 
     public static ObservableList<Article> getAllArticles() throws SQLException, ClassNotFoundException {
@@ -316,10 +316,11 @@ public class Database {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("SELECT * FROM transactions_table WHERE first_name='%s' AND last_name='%s'", firstName, lastName);
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM transactions_table WHERE first_name=? AND last_name=?");
+        statement.setString(1, firstName);
+        statement.setString(2, lastName);
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
+        ResultSet resultSet = statement.executeQuery();
 
         while (resultSet.next()) {
             int transactionId = resultSet.getInt("transaction_id");
@@ -366,10 +367,12 @@ public class Database {
         StringBuilder stringBuilder = new StringBuilder();
         Formatter formatter = new Formatter(stringBuilder);
 
-        formatter.format("SELECT quantity_borrowed FROM transactions_table WHERE first_name='%s' AND last_name='%s' AND book_id='%d' AND date_returned is NULL", firstName, lastName, bookId);
+        PreparedStatement statement = connection.prepareStatement("SELECT quantity_borrowed FROM transactions_table WHERE first_name=? AND last_name=? AND book_id=? AND date_returned is NULL");
+        statement.setString(1, firstName);
+        statement.setString(2, lastName);
+        statement.setInt(3, bookId);
 
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(stringBuilder.toString());
+        ResultSet resultSet = statement.executeQuery();
 
         while(resultSet.next()) {
             int currentQuantity = resultSet.getInt("quantity_borrowed");
